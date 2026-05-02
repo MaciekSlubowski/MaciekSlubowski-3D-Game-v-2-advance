@@ -1,0 +1,9 @@
+<svg width="50" height="50" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="64" cy="64" r="60" fill="#B22222" stroke="#8B0000" stroke-width="4"/>
+
+  <circle cx="64" cy="64" r="48" fill="#E32636" />
+
+  <ellipse cx="45" cy="45" rx="15" ry="10" fill="white" opacity="0.4" transform="rotate(-45 45 45)"/>
+
+  <text x="64" y="78" font-family="Arial, sans-serif" font-size="50" text-anchor="middle" fill="#8B0000" font-weight="bold">$</text>
+</svg>

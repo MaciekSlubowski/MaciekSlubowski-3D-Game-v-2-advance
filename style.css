@@ -1,0 +1,326 @@
+#container{
+	position:absolute;
+	width:1200px;  /* Z powrotem 1200 */
+	height:800px;  /* Z powrotem 800 */
+	border:2px solid #000000;
+	perspective:600px; /* Z powrotem 600 */
+	overflow:hidden;
+	background-image: url('tlo.png');
+	background-size: cover; 
+	background-repeat: no-repeat; 
+	background-position: center center; 
+}
+
+#world{
+	position:absolute;
+	width:inherit;
+	height:inherit;
+	transform-style:preserve-3d;
+}
+
+.square{
+	position:absolute;
+
+}
+
+.menu{
+	display:none;
+	position:absolute;
+	width:inherit;
+	height:inherit;
+	/* USUNIĘCIE background-color, aby widzieć tło z #container */
+	background-color: transparent; /* Zmień lub usuń ten kolor, jeśli ma być widoczne tło z #container */
+}
+
+/* ZMNIEJSZENIE WYMIARÓW PRZYCISKÓW DLA LEPSZEGO DOPASOWANIA */
+.button{
+	position:absolute;
+	width:400px; 
+	height:100px;
+	background-color:#FFF;
+	cursor:pointer;
+	/* Dodanie marginesów i centrowanie dla czytelności */
+	left: 50%;
+	transform: translateX(-50%);
+	border: 2px solid #000;
+	box-sizing: border-box; /* Utrzymuje rozmiar 400x100 z ramką */
+}
+
+.button:hover{
+	background-color:#DDD000;
+}
+
+/* DOPASOWANIE POZYCJONOWANIA W GŁÓWNYM MENU (menu1) */
+#button1{ /* Start game */
+	top:150px;
+}
+
+#button2{ /* Instructions */
+	top:300px; 
+}
+
+#button4{ /* Rules - Nowy przycisk dodany w kodzie HTML */
+	top:450px;
+}
+
+/* POZYCJONOWANIE PRZYCISKÓW POWROTU */
+/* button3 jest w menu2 (Instructions) */
+#button3{ 
+	top:650px; /* Przeniesienie na dół, aby nie kolidował z tekstem instrukcji */
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* button5 jest w menu3 (Rules) - dodaliśmy go w JavaScript/HTML */
+#button5{
+	top:650px; /* Przeniesienie na dół, aby nie kolidował z tekstem zasad */
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* ZMNIEJSZENIE TEKSTU I ZMIANA POZYCJI W MENU INSTRUKCJI/ZASAD (menu2 i menu3) */
+.menu p {
+	/* Pozycjonowanie i wymiary (zostają bez zmian) */
+	position: absolute;
+	top: 150px;
+	left: 50%;
+	width: 90%;
+	margin: 0px;
+	transform: translate(-50%, 0);
+
+	/* Podstawowa typografia */
+	font-family: game;
+	font-size: 40px;
+	line-height: 1.5;
+	text-align: center;
+
+	/* --- NOWE WŁAŚCIWOŚCI DLA LEPSZEJ CZYTELNOŚCI --- */
+	
+	/* 1. Pogrubienie tekstu */
+	font-weight: bold; 
+	
+	/* 2. Kolor tekstu (biały zazwyczaj wygląda najlepiej z czarnym obrysem) */
+	color: #ffffff; 
+	
+	/* 3. Delikatne rozsunięcie liter, żeby się nie zlewały */
+	letter-spacing: 2px; 
+	
+	/* 4. Czarny obrys i cień (dzięki temu tekst jest czytelny na KADYM tle) */
+	text-shadow: 
+		-2px -2px 0 #000,  /* Lewy górny obrys */
+		 2px -2px 0 #000,  /* Prawy górny obrys */
+		-2px  2px 0 #000,  /* Lewy dolny obrys */
+		 2px  2px 0 #000,  /* Prawy dolny obrys */
+		 4px  4px 5px rgba(0, 0, 0, 0.8); /* Miękki cień rzucany pod tekstem */
+}
+
+/* Styl dla tekstu przycisku */
+.button p{
+	font-size:40px; /* Użycie większej czcionki tylko dla tekstu w przyciskach */
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+}
+
+@font-face{
+	font-family:game;
+	src:url("fonts/1.ttf") format("truetype");
+}
+
+.coin{
+	border-radius: 50%;
+	background-image: url("Patterns/coin.png"); 
+	
+	/* 3. Właściwości tła dla lepszego wyświetlania tekstury */
+	/* Upewnij się, że obraz wypełnia całe koło i jest poprawnie wyświetlany */
+	background-size: cover; /* Skaluje obraz, aby pokrył całe koło */
+	background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
+	background-position: center; /* Centruje obraz wewnątrz koła */
+
+    /* 4. Usunięcie wszelkich czarnych kolorów tła, które mogą się przedostawać */
+    background-color: transparent;
+}
+
+.key{
+	/* Stylizacja klucza, podobna do monety */
+	background-image: url("Patterns/key.png"); 
+	background-size: cover; 
+	background-repeat: no-repeat; 
+	background-position: center; 
+    background-color: transparent;
+}
+
+.coin {
+	border-radius: 50%;
+	transform-style: preserve-3d;
+	background-color: transparent !important;
+	background-image: none !important;
+    /* Gwarantuje obrót wokół środka */
+    transform-origin: center center; 
+}
+
+.coin-layer {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center;
+	transform-origin: center center;
+    /* USUŃ LINIJKĘ Z BOX-SHADOW JEŚLI TU JEST! */
+}
+
+
+.portal {
+    background-color: transparent !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* 1. Wymuszenie idealnego koła, by poświata nie była kwadratowa */
+    border-radius: 50%; 
+    
+   /* 3. Podbicie kolorów i jasności tekstury */
+    filter: hue-rotate(0deg) contrast(1.2) brightness(1.1); 
+    
+    transform-origin: center center;
+    
+    /* 4. Opcjonalnie: Uruchomienie animacji pulsowania */
+    animation: portalPulse 2s infinite alternate ease-in-out;
+}
+
+/* --- ANIMACJA PULSOWANIA PORTALU --- */
+@keyframes portalPulse {
+    30% {
+        box-shadow: 
+            0 0 40px 5px rgba(0, 170, 255, 0.5), 
+            inset 0 0 10px 5px rgba(255, 255, 255, 0.4);
+        filter: hue-rotate(0deg) contrast(1.1) brightness(1);
+    }
+    100% {
+        box-shadow: 
+            0 0 120px 15px rgba(0, 170, 255, 1), 
+            inset 0 0 30px 10px rgba(255, 255, 255, 0.8);
+        filter: hue-rotate(0deg) contrast(1.3) brightness(1.3);
+    }
+}
+
+#gameMessages {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+    text-shadow: 3px 3px 0 #000;
+    pointer-events: none;
+    display: none;
+    font-family: 'game', sans-serif;
+    
+    /* Ustawienia na dole ekranu */
+    bottom: 100px;
+    font-size: 40px;
+}
+
+#gameMessages.fast-speed {
+    top: 10px;        /* Zmniejszamy odstęp do minimum - napis przyklei się do góry */
+    bottom: auto;     /* Wyłącza pozycjonowanie od dołu */
+    font-size: 120px; /* Zmieniamy rozmiar z 75px na GIGANTYCZNE 120px */
+    
+    /* Zaktualizowany cień, żeby tak duży tekst wciąż był czytelny */
+    text-shadow: 
+        4px 4px 0 #000, 
+        -3px -3px 0 #000, 
+         3px -3px 0 #000, 
+        -3px  3px 0 #000, 
+         3px  3px 0 #000;
+}
+
+
+@keyframes popIn {
+    0% { 
+        transform: translate(-50%, -50%) scale(0); /* Zaczyna jako niewidoczna kropka */
+        opacity: 0;
+    }
+    40% { 
+        transform: translate(-50%, -50%) scale(1.2); /* Lekko "przeskakuje" normalny rozmiar (efekt bounce) */
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1); /* Zatrzymuje się na normalnym rozmiarze */
+        opacity: 1;
+    }
+}
+
+/* --- POTĘŻNA ANIMACJA DLA ZBIERANEJ MONETY --- */
+@keyframes massiveZoomIn {
+    0% { 
+        /* Startuje jako niewidoczna kropka na środku */
+        transform: translate(-50%, -50%) scale(0); 
+        opacity: 0;
+    }
+    60% { 
+        /* Gwałtownie rośnie do 180% swojego rozmiaru (efekt uderzenia) */
+        transform: translate(-50%, -50%) scale(1.8); 
+        opacity: 1;
+    }
+    100% { 
+        /* Osiada na swoim docelowym, wielkim rozmiarze */
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 1;
+    }
+}
+
+/* Klasa CSS dla monety na idealnym środku ekranu */
+#gameMessages.coin-pickup {
+    top: 50%;             /* Ustawia element równo w połowie wysokości */
+    bottom: auto;         /* Gwarantuje, że tekst odczepi się od dołu ekranu */
+    
+    font-size: 130px;     /* Zwiększono rozmiar z 80px na 130px */
+    font-weight: 900;     /* Maksymalne pogrubienie tekstu (ekstra bold) */
+    
+    /* Pogrubiony i powiększony czarny obrys dodający masy i czytelności */
+    text-shadow: 
+        5px 5px 0 #000, 
+       -4px -4px 0 #000, 
+        4px -4px 0 #000, 
+       -4px  4px 0 #000, 
+        4px  4px 0 #000;
+    
+    /* Wywołanie nowej animacji - trwa pół sekundy */
+    animation: massiveZoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+}
+
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: none; /* Sterowane przez menu.js */
+}
+
+#hud-background {
+    background-color: rgba(0, 0, 0, 0.4); /* Lekkie przyciemnienie (40% czerni) */
+    backdrop-filter: blur(5px);          /* Rozmycie tła pod HUDem */
+    padding: 15px 25px;                  /* Margines wewnętrzny */
+    border-radius: 20px;                 /* Zaokrąglone rogi */
+    border: 2px solid rgba(255, 255, 255, 0.1); /* Delikatna ramka */
+}
+
+#hud p {
+    margin: 5px 0;
+    color: white;
+    font-family: 'game', sans-serif;
+    font-size: 35px;                     /* Powiększona czcionka */
+    text-shadow: 2px 2px 0 #000;         /* Wyraźniejszy cień pod tekstem */
+    letter-spacing: 1px;
+}
+
+#timerRow {
+    color: #00ff00 !important;           /* Czas domyślnie na zielono */
+}
+
+/* Wartości wewnątrz spanów mogą być jeszcze większe */
+#hud span {
+    font-weight: bold;
+    margin-left: 5px;
+}

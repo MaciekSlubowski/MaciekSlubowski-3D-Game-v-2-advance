@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<TITLE>3D GAME</TITLE>
+		<LINK rel="stylesheet" href="style.css">
+		<meta charset="utf-8">
+	</HEAD>
+	
+	<BODY>
+	
+		<div id="container">
+		<div id="hud">
+			<div id="hud-background">
+					<p>Coins: <span id="coinCountUI">0</span></p>
+					<p>Keys: <span id="keyCountUI">0 / 0</span></p>
+					<p>Score: <span id="totalScoreUI">0</span></p>
+					<p id="timerRow">Time: <span id="timerUI">60.0</span>s</p>
+			</div>
+		</div>
+
+			<div id="gameMessages"></div>
+		
+		
+			<div id="world">
+			</div>
+			<div id="menu1" class="menu" style="display:block">
+				<div id="button1" class="button">
+					<p>Start game</p>
+				</div>
+				<div id="button2" class="button">
+					<p>Instructions</p>
+				</div>
+				<div id="button4" class="button">
+					<p>Rules</p>
+				</div>
+			</div>
+			<div id="menu2" class="menu">
+				<p style="font-size:30px;top:200px;">
+					<strong>Control keys</strong><br>
+					w - Go Forward<br>
+					s - Go Back<br>
+					d - Go Right<br>
+					a - Go Left<br>
+					Space - Jumping<br>
+					You can play using English keyboard!
+					
+				</p>
+				<div id="button3" class="button">
+					<p>Back</p>
+				</div>
+			</div>
+			<div id="menu3" class="menu">
+				<p style="font-size:30px;top:200px;">
+					<strong>Game Rules</strong><br>
+					1. Collect all the **coins** to win.<br>
+					2. Try to beat your record!<br>
+					3. Have fun!
+				</p>
+				<div id="button5" class="button"> 
+					<p>Back</p>
+				</div>
+			</div>
+			<div id="menu4" class="menu" style="display:none;">
+				<p style="font-size:30px; top:100px;">
+					<strong>LEVEL SUMMARY</strong><br><br>
+					Total Coins: <span id="summaryTotalCoins" style="color:#f1c40f;">0</span><br>
+					Total Keys: <span id="summaryTotalKeys" style="color:#3498db;">0</span><br>
+					Total Time: <span id="summaryTotalTime" style="color:#2ecc71;">0.0</span> s<br>
+					Total Score: <span id="summaryTotalScore" style="color:#e74c3c;">0</span>
+				</p>
+				<div id="button6" class="button" style="top:600px; left:50%; transform:translateX(-50%);"> 
+					<p>Next Level</p>
+				</div>
+			</div>
+	</BODY>
+<script src="script.js"></script>
+<script src="menu.js"></script>
+<script src="Maciej.js"></script>
+<script src="Maciejv2.js"></script>
+<script src="michal.js"></script>
+
+
+</HTML>
